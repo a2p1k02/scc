@@ -52,9 +52,40 @@ static int scanint(int c)
     return val;
 }
 
+static int scanident(int c, char *buf, int lim)
+{
+    int i = 0;
+
+    while (isalpha(c) || isdigit(c) || '_' == c) {
+        if (lim - 1 == i) {
+            printf("identifier too long on line %d\n", Line);
+            exit(1);
+        } else if (i < lim - 1) {
+            buf[i++] = c;
+        }
+        c = next();
+    }
+
+    putback(c);
+    buf[i] = '\0';
+    return (i);
+}
+
+static int keyword(char *s)
+{
+    switch (*s) {
+        case 'p':
+            if (!strcmp(s, "print"))
+                return (T_PRINT);
+        break;
+    }
+    return (0);
+}
+
 int scan(struct token *t)
 {
-    int c;
+    int c, tokentype;
+
     c = skip();
 
     switch (c) {
@@ -73,11 +104,23 @@ int scan(struct token *t)
     case '/':
         t->token = T_SLASH;
         break;
+    case ';':
+        t->token = T_SEMI;
+        break;
     default:
         if (isdigit(c)) {
             t->intvalue = scanint(c);
             t->token = T_INTLIT;
             break;
+        } else if (isalpha(c) || '_' == c) {
+            scanident(c, Text, TEXTLEN);
+
+            if (tokentype = keyword(Text)) {
+                t->token = tokentype;
+                break;
+            }
+            printf("Unrecognised symbol %s on line %d\n", Text, Line);
+            exit(1);
         }
         printf("Unrecognised character %c on line %d\n", c, Line);
         exit(1);

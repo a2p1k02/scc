@@ -39,10 +39,9 @@ int main(int ac, char **av)
     }
 
     scan(&Token);
-    n = binexpr(0);
-    printf("%d\n", interpreterAST(n));
-
-    generatecode(n);
+    genpreamble();
+    statements();
+    genpostamble();
     fclose(Outfile);
 
     exit(0);
