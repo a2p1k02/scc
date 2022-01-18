@@ -5,3 +5,13 @@
 - [ ] Read C-file
 - [ ] ...
 - [ ] Write C standard lib
+
+### Build
+#### Makefile:
+1. ```make```
+2. ```./scc file```
+
+#### CMake:
+1. ```mkdir build```
+2. ```cd build && cmake .. && make```
+3. ```./scc file```
