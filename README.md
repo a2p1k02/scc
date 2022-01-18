@@ -8,10 +8,16 @@
 
 ## Build
 ### Makefile:
-1. ```make```
-2. ```./scc file```
+```
+make
+```
 
 ### CMake:
-1. ```mkdir build```
-2. ```cd build && cmake .. && make```
-3. ```./scc file```
+```
+mkdir build && cd build && cmake .. && make
+```
+
+## Usage
+```
+./scc file
+```
