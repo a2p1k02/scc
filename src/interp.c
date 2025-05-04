@@ -12,10 +12,10 @@ int interpretAST(struct ASTnode* n) {
     if (n->right)
         rightval = interpretAST(n->right);
 
-    if (n->op == A_INT_LIT)
-        printf("int %d\n", n->int_value);
-    else
-        printf("%d %s %d\n", leftval, ASTop[n->op], rightval);
+    // if (n->op == A_INT_LIT)
+    //     printf("int %d\n", n->int_value);
+    // else
+    //     printf("%d %s %d\n", leftval, ASTop[n->op], rightval);
 
     switch (n->op) {
         case A_ADD:
