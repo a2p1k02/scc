@@ -30,8 +30,8 @@ static void putback(int c) {
 
 static int skip() {
     int c;
-    c = next();
 
+    c = next();
     while (' ' == c || '\t' == c || '\n' == c || '\r' == c || '\f' == c) {
         c = next();
     }
@@ -58,6 +58,7 @@ int scan(struct token* t) {
 
     switch (c) {
         case EOF:
+            t->token = T_EOF;
             return 0;
         case '+':
             t->token = T_PLUS;
@@ -74,7 +75,7 @@ int scan(struct token* t) {
         default:
             if (isdigit(c)) {
                 t->int_value = scanint(c);
-                t->token = T_INTLIT;
+                t->token = T_INT_LIT;
                 break;
             }
             printf("Unrecognised character %c on line %d\n", c, line);
